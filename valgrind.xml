@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+
+<valgrindoutput>
+
+<protocolversion>4</protocolversion>
+<protocoltool>memcheck</protocoltool>
+
+<preamble>
+  <line>Memcheck, a memory error detector</line>
+  <line>Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.</line>
+  <line>Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info</line>
+  <line>Command: /home/btnt51/git/c++/ML/cmake-build-debug/ML</line>
+</preamble>
+
+<pid>99549</pid>
+<ppid>92718</ppid>
+<tool>memcheck</tool>
+
+<args>
+  <vargv>
+    <exe>/usr/bin/valgrind</exe>
+    <arg>--tool=memcheck</arg>
+    <arg>--xml=yes</arg>
+    <arg>--xml-file=/tmp/clion-valgrindfc5f094b-fd04-4c47-bd41-22c1cc424a82/valgrind_output_%p</arg>
+    <arg>--gen-suppressions=all</arg>
+    <arg>--leak-check=full</arg>
+    <arg>--leak-resolution=med</arg>
+    <arg>--track-origins=yes</arg>
+    <arg>--vgdb=no</arg>
+  </vargv>
+  <argv>
+    <exe>/home/btnt51/git/c++/ML/cmake-build-debug/ML</exe>
+  </argv>
+</args>
+
+<status>
+  <state>RUNNING</state>
+  <time>00:00:00:00.145 </time>
+</status>
+
+<error>
+  <unique>0x0</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x111396</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>std::vector&lt;double, std::allocator&lt;double&gt; &gt;::size() const</fn>
+      <dir>/usr/include/c++/10.2.0/bits</dir>
+      <file>stl_vector.h</file>
+      <line>919</line>
+    </frame>
+    <frame>
+      <ip>0x119F7F</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>KMeansMethod::GetDistance(std::vector&lt;double, std::allocator&lt;double&gt; &gt;*, Data*, int)</fn>
+      <dir>/home/btnt51/git/c++/ML/Algorithms/K-means/source</dir>
+      <file>Kmeans.cpp</file>
+      <line>151</line>
+    </frame>
+    <frame>
+      <ip>0x119ACF</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>KMeansMethod::Train()</fn>
+      <dir>/home/btnt51/git/c++/ML/Algorithms/K-means/source</dir>
+      <file>Kmeans.cpp</file>
+      <line>105</line>
+    </frame>
+    <frame>
+      <ip>0x10B7CA</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>main</fn>
+      <dir>/home/btnt51/git/c++/ML</dir>
+      <file>main.cpp</file>
+      <line>81</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x20 is not stack'd, malloc'd or (recently) free'd</auxwhat>
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Addr8</skind>
+    <sframe> <fun>_ZNKSt6vectorIdSaIdEE4sizeEv</fun> </sframe>
+    <sframe> <fun>_ZN12KMeansMethod11GetDistanceEPSt6vectorIdSaIdEEP4Datai</fun> </sframe>
+    <sframe> <fun>_ZN12KMeansMethod5TrainEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:_ZNKSt6vectorIdSaIdEE4sizeEv
+   fun:_ZN12KMeansMethod11GetDistanceEPSt6vectorIdSaIdEEP4Datai
+   fun:_ZN12KMeansMethod5TrainEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+</error>
+
+  <suppression>
+    <sname>insert_a_suppression_name_here</sname>
+    <skind>Memcheck:Addr8</skind>
+    <sframe> <fun>_ZNKSt6vectorIdSaIdEE4sizeEv</fun> </sframe>
+    <sframe> <fun>_ZN12KMeansMethod11GetDistanceEPSt6vectorIdSaIdEEP4Datai</fun> </sframe>
+    <sframe> <fun>_ZN12KMeansMethod5TrainEv</fun> </sframe>
+    <sframe> <fun>main</fun> </sframe>
+    <rawtext>
+<![CDATA[
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:_ZNKSt6vectorIdSaIdEE4sizeEv
+   fun:_ZN12KMeansMethod11GetDistanceEPSt6vectorIdSaIdEEP4Datai
+   fun:_ZN12KMeansMethod5TrainEv
+   fun:main
+}
+]]>
+    </rawtext>
+  </suppression>
+<fatal_signal>
+  <tid>1</tid>
+  <signo>11</signo>
+  <signame>SIGSEGV</signame>
+  <sicode>1</sicode>
+  <event>Access not within mapped region</event>
+  <siaddr>0x20</siaddr>
+  <stack>
+    <frame>
+      <ip>0x111396</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>std::vector&lt;double, std::allocator&lt;double&gt; &gt;::size() const</fn>
+      <dir>/usr/include/c++/10.2.0/bits</dir>
+      <file>stl_vector.h</file>
+      <line>919</line>
+    </frame>
+    <frame>
+      <ip>0x119F7F</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>KMeansMethod::GetDistance(std::vector&lt;double, std::allocator&lt;double&gt; &gt;*, Data*, int)</fn>
+      <dir>/home/btnt51/git/c++/ML/Algorithms/K-means/source</dir>
+      <file>Kmeans.cpp</file>
+      <line>151</line>
+    </frame>
+    <frame>
+      <ip>0x119ACF</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>KMeansMethod::Train()</fn>
+      <dir>/home/btnt51/git/c++/ML/Algorithms/K-means/source</dir>
+      <file>Kmeans.cpp</file>
+      <line>105</line>
+    </frame>
+    <frame>
+      <ip>0x10B7CA</ip>
+      <obj>/home/btnt51/git/c++/ML/cmake-build-debug/ML</obj>
+      <fn>main</fn>
+      <dir>/home/btnt51/git/c++/ML</dir>
+      <file>main.cpp</file>
+      <line>81</line>
+    </frame>
+  </stack>
+</fatal_signal>
+
+
+<status>
+  <state>FINISHED</state>
+  <time>00:00:07:08.543 </time>
+</status>
+
+<errorcounts>
+  <pair>
+    <count>1</count>
+    <unique>0x0</unique>
+  </pair>
+</errorcounts>
+
+<suppcounts>
+</suppcounts>
+
+</valgrindoutput>
+
+

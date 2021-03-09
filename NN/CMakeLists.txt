@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.17)
+project(NN)
+set(CMAKE_CXX_STANDARD 20)
+#include_directories(headers source)
+set(SOURCE_LIB source/Neuron.cpp source/Layer.cpp source/NeuralNetwork.cpp)
+set(HEADERS_LIB headers/Neuron.h headers/Layer.h headers/NeuralNetwork.h)
+add_library(NN STATIC ${SOURCE_LIB} ${HEADERS_LIB})
+#target_link_libraries(NN ${HEADERS_LIB} ${SOURCE_LIB})
