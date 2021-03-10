@@ -73,7 +73,7 @@ void NeuralNetwork::BackPropagation(Data *Data) {
     //std::cout << "BP dbg msg 1 \n";
     //for(unsigned i = Layers.size() - 1; i>=0;i--)
     unsigned  i = Layers.size()-1;
-    while(0 < i){
+    while(0 <= i && i > Layers.size()){
       //  std::cout << "BP dbg msg 2 iteration #" << i << "\n";
         Layer *TempLayer = Layers.at(i);
         std::vector<double> Errors;
@@ -95,7 +95,7 @@ void NeuralNetwork::BackPropagation(Data *Data) {
             for(int j = 0; j < TempLayer->Neurons.size(); ++j){
               //  std::cout << "BP dbg msg 8 \n";
                 auto &El = TempLayer->Neurons.at(j);
-                Errors.push_back(static_cast<double>(Data->GetClassVector().at(j)-El->Output)); //calculating expected - actual
+                Errors.push_back(static_cast<double>(Data->GetClassVector().at(j) - El->Output)); //calculating expected - actual
                 //std::cout << "BP dbg msg 9 \n";
             }
            // std::cout << "BP dbg msg 10 \n";
@@ -160,8 +160,8 @@ void NeuralNetwork::Train(int NumberOfEpochs) {
             std::vector<int> Expected = El->GetClassVector();
             double TempSumOfErrors{};
             for(int j = 0; j < Outputs.size(); j++)
-                TempSumOfErrors += static_cast<double>(Expected.at(j) - Outputs.at(j));
-            SumOfErrors +=TempSumOfErrors;
+                TempSumOfErrors += pow(static_cast<double>(Expected.at(j) - Outputs.at(j)),2);
+            SumOfErrors += TempSumOfErrors;
             BackPropagation(El);
             UpdateWeights(El);
         }
@@ -202,6 +202,34 @@ double NeuralNetwork::ValidateProduce() {
     }
     Performance = AmountOfCorrectPredictions / Counter;
     return Performance;
+}
+
+void NeuralNetwork::TrainWhile() {
+    double TSumOfErrors= 100000;
+    long Epoch{};
+    long double Temp{};
+    while((TSumOfErrors > 0.4 && 0.5 < TSumOfErrors) || (TSumOfErrors > 1.0 && TSumOfErrors < 2.0)){
+        TSumOfErrors = 0.0;
+        long Counter{};
+        double SumOfErrors{};
+        for(auto &El : DataForTraining){
+            std::vector<double> Outputs = ForwardPropagation(El);
+            std::vector<int> Expected = El->GetClassVector();
+            double TempSumOfErrors{};
+            for(int j = 0; j < Outputs.size(); j++)
+                TempSumOfErrors += static_cast<double>(Expected.at(j) - Outputs.at(j));
+            Temp = SumOfErrors - TempSumOfErrors;
+            SumOfErrors += TempSumOfErrors;
+            BackPropagation(El);
+            UpdateWeights(El);
+            Counter++;
+        }
+        TSumOfErrors += SumOfErrors;
+        Epoch++;
+        //std::cout << "Epoch " << i << "Error % = " << SumOfErrors << "\n";
+        printf("Iteration: %d \t Error=%.4f\n", Epoch, SumOfErrors);
+        std::cout << "tr " << Temp << std::endl;
+    }
 }
 
 

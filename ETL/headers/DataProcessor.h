@@ -53,9 +53,9 @@ private:
     std::vector<Data *> DataForTesting{};
     std::vector<Data *> DataForValidation{};
 
-    const double TrainingPercent = 0.800;
-    const double TestPercent = 0.175;
-    const double ValidationPercent = 0.025;
+    const double TrainingPercent = 0.01;
+    const double TestPercent = 0.005;
+    const double ValidationPercent = 0.00025;
 };
 
 

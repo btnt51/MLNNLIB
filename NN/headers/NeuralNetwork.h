@@ -27,6 +27,7 @@ public:
     void BackPropagation(Data *);
     void UpdateWeights(Data *);
     void Train(int);
+    void TrainWhile();
 
 private:
     double LearningRate{};

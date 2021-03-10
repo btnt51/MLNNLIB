@@ -12,8 +12,8 @@ int main() {
     //dataProcessor->ReadInputData("C:\\code\\ML\\t10k-images-idx3-ubyte\\t10k-images.idx3-ubyte");
     //dataProcessor->ReadInputLabel("C:\\code\\ML\\t10k-labels-idx1-ubyte\\t10k-labels.idx1-ubyte");
     //laptop
-    dataProcessor->ReadInputData("D:\\c++\\ML\\train-images-idx3-ubyte\\train-images.idx3-ubyte");
-    dataProcessor->ReadInputLabel("D:\\c++\\ML\\train-labels-idx1-ubyte\\train-labels.idx1-ubyte");
+    dataProcessor->ReadInputData("..\\train-images-idx3-ubyte\\train-images.idx3-ubyte");
+    dataProcessor->ReadInputLabel("..\\train-labels-idx1-ubyte\\train-labels.idx1-ubyte");
     //dataProcessor->ReadInputData("D:\\c++\\ML\\t10k-images-idx3-ubyte\\t10k-images.idx3-ubyte");
     //dataProcessor->ReadInputLabel("D:\\c++\\ML\\t10k-labels-idx1-ubyte\\t10k-labels.idx1-ubyte");
     //laptop manjaro linux
@@ -86,7 +86,8 @@ int main() {
     Net->SetDataForTraining(dataProcessor->GetDataForTraining());
     Net->SetDataForTesting(dataProcessor->GetDataForTesting());
     Net->SetDataForValidation(dataProcessor->GetDataForValidation());
-    Net->Train(15);
+    //Net->Train(15);
+    Net->TrainWhile();
     std::cout << "Test Performance is " << Net->TestProduce() <<"\n";
     std::cout << "Validation Produce is " << Net->ValidateProduce() << "\n";
     return 0;
