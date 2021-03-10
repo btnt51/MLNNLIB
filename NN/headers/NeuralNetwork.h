@@ -28,6 +28,7 @@ public:
     void UpdateWeights(Data *);
     void Train(int);
     void TrainWhile();
+    void NewTypeOfTrain();
 
 private:
     double LearningRate{};

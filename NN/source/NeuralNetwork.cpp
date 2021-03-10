@@ -232,4 +232,24 @@ void NeuralNetwork::TrainWhile() {
     }
 }
 
+void NeuralNetwork::NewTypeOfTrain() {
+    while(true){
+        unsigned Counter;
+        double SumOfErrors{};
+        for(auto &El : DataForTraining){
+            std::vector<double> Outputs = ForwardPropagation(El);
+            std::vector<int> Expected = El->GetClassVector();
+            double TempSumOfErrors{};
+            for(int j = 0; j < Outputs.size(); j++)
+                TempSumOfErrors += pow(static_cast<double>(Expected.at(j) - Outputs.at(j)),2);
+            SumOfErrors += TempSumOfErrors;
+            BackPropagation(El);
+            UpdateWeights(El);
+            Counter++;
+        }
+        //std::cout << "Epoch " << i << "Error % = " << SumOfErrors << "\n";
+        printf("Iteration: %d \t Error=%.10f\n", Counter, SumOfErrors);
+    }
+}
+
 

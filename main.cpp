@@ -14,6 +14,8 @@ int main() {
     //laptop
     dataProcessor->ReadInputData("..\\train-images-idx3-ubyte\\train-images.idx3-ubyte");
     dataProcessor->ReadInputLabel("..\\train-labels-idx1-ubyte\\train-labels.idx1-ubyte");
+    //dataProcessor->ReadInputData("D:\\c++\\ML\\train-images-idx3-ubyte\\train-images.idx3-ubyte");
+    //dataProcessor->ReadInputLabel("D:\\c++\\ML\\train-labels-idx1-ubyte\\train-labels.idx1-ubyte");
     //dataProcessor->ReadInputData("D:\\c++\\ML\\t10k-images-idx3-ubyte\\t10k-images.idx3-ubyte");
     //dataProcessor->ReadInputLabel("D:\\c++\\ML\\t10k-labels-idx1-ubyte\\t10k-labels.idx1-ubyte");
     //laptop manjaro linux
@@ -79,15 +81,17 @@ int main() {
     km->InitClusters();
     km->Train();
     printf("Overall Performance: %.2f\n",km->TestProduce());*/
-    std::vector<int> HiddenLayer = {10};
+    std::vector<int> HiddenLayer = {2, 4, 6, 8};
     auto *Net = new NeuralNetwork(HiddenLayer,
                                   dataProcessor->GetDataForTraining().at(0)->GetNormalizedFeatureVector().size(),
-                                           dataProcessor->GetCountsOfClasses(), 0.25);
+                                           dataProcessor->GetCountsOfClasses(), 0.0000005);
     Net->SetDataForTraining(dataProcessor->GetDataForTraining());
     Net->SetDataForTesting(dataProcessor->GetDataForTesting());
     Net->SetDataForValidation(dataProcessor->GetDataForValidation());
     //Net->Train(15);
-    Net->TrainWhile();
+    //Net->TrainWhile();
+    //Net->Train(1000);
+    Net->NewTypeOfTrain();
     std::cout << "Test Performance is " << Net->TestProduce() <<"\n";
     std::cout << "Validation Produce is " << Net->ValidateProduce() << "\n";
     return 0;
