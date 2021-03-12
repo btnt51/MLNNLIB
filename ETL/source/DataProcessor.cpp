@@ -30,7 +30,7 @@ DataProcessor::~DataProcessor() {
 
 void DataProcessor::ReadInputData(const std::string& PathToFile) {
     uint32_t Header[4]{};     //Number | Number of Images | Number of Rows | Number of Columns
-    unsigned char Bytes[4]{}; //using for read 32 bits of information for Header
+    unsigned char Bytes[4]{}; //using for read 32 bits of information for header
     FILE *FileWithImages;     //file with data
     FileWithImages = std::fopen(PathToFile.c_str(), "rb");
     if(FileWithImages){
@@ -42,7 +42,7 @@ void DataProcessor::ReadInputData(const std::string& PathToFile) {
 
         std::cout << Header[0] << "|" << Header[1] << "|" << Header[2] << "|"  << Header[3] << std::endl;
         uint32_t SizeOfImage = Header[2] * Header[3];
-        std::cout << "Header was read\n";
+        std::cout << "header was read\n";
         for(int i = 0; i < Header[1];++i){
             Data *DataFromFile = new Data();
             uint8_t Pixel[1]{};
