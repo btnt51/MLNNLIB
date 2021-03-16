@@ -30,6 +30,6 @@ public:
 
 private:
     int NumberOfNeighbors{};
-    std::vector<Data *> Neighbors;
+    std::vector<Data *> *Neighbors;
 };
 #endif //ML_KNN_H

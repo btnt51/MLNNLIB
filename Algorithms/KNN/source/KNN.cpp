@@ -31,27 +31,30 @@ KnnMethod::KnnMethod(std::vector<Data *> DForTraining, std::vector<Data *> DForT
 
 
 KnnMethod::~KnnMethod() {
-    for(Data *El : Neighbors)
+    for(Data *El : *Neighbors)
         delete El;
-    Neighbors.clear();
+    Neighbors->clear();
+    delete Neighbors;
+    Neighbors = nullptr;
 }
 
 
 void KnnMethod::FindKNearest(Data *QueryPoint) {
+    Neighbors = new std::vector<Data *>();
     double Minimum = max;
     double PreviousMinimum = Minimum;
     int Index{};
     for(int i = 0; i < NumberOfNeighbors; i++){
         if(i == 0){
-            for(int j =0; j < DataForTraining.size(); j++){
-                double Distance = CalculateDistance(QueryPoint,DataForTraining.at(j));
-                if(Distance < Minimum){
+            for(int j =0; j < DataForTraining.size(); j++) {
+                double Distance = CalculateDistance(QueryPoint, DataForTraining.at(j));
+                DataForTraining.at(j)->SetDistance(Distance);
+                if (Distance < Minimum) {
                     Minimum = Distance;
                     Index = j;
                 }
             }
-
-            Neighbors.push_back(DataForTraining.at(Index));
+            Neighbors->push_back(DataForTraining.at(Index));
             PreviousMinimum = Minimum;
             Minimum = max;
 
@@ -64,7 +67,7 @@ void KnnMethod::FindKNearest(Data *QueryPoint) {
                 }
             }
 
-            Neighbors.push_back(DataForTraining.at(Index));
+            Neighbors->push_back(DataForTraining.at(Index));
             PreviousMinimum = Minimum;
             Minimum = max;
         }
@@ -74,15 +77,19 @@ void KnnMethod::FindKNearest(Data *QueryPoint) {
 
 int KnnMethod::GetTheMostFrequentClass() {
     std::map<uint8_t, int> MapOfFrequency;
-    for(auto &El : Neighbors)
-        (MapOfFrequency.find(El->GetLabel()) == MapOfFrequency.end()) ? MapOfFrequency[El->GetLabel()] = 1 : MapOfFrequency[El->GetLabel()]++;
+    for(auto &El : *Neighbors) {
+        if (MapOfFrequency.find(El->GetLabel()) == MapOfFrequency.end())
+            MapOfFrequency[El->GetLabel()] = 1;
+        else
+            MapOfFrequency[El->GetLabel()]++;
+    }
 
     int Maximum{};
     int TheMost{};
     for(auto &El : MapOfFrequency){
         if(El.second > Maximum){
             Maximum = El.second;
-            TheMost = El.first;
+            TheMost = static_cast<int>(El.first);
         }
     }
     return TheMost;
@@ -135,10 +142,10 @@ double KnnMethod::ValidateProduce() {
         FindKNearest(El);
         int Prediction = GetTheMostFrequentClass();
         DataIndex++;
-//        (Prediction == El->GetLabel()) ? Counter++ : Counter;
         if(Prediction == El->GetLabel()) Counter++;
-        auto Percent = static_cast<double>((Counter*100.0)/DataIndex);
-        std::cout << "Current produce = " << Percent << "\n";
+//        auto Percent = static_cast<double>((Counter*100.0)/DataIndex);
+//        std::cout << "Current produce = " << Percent << "\n";
+
     }
 
     auto CurrentProduce = static_cast<double>((Counter * 100.0)/DataForValidation.size());
@@ -152,9 +159,7 @@ double KnnMethod::TestProduce() {
     for(Data *El : DataForTesting){
         FindKNearest(El);
         int Prediction = GetTheMostFrequentClass();
-//        (Prediction == El->GetLabel()) ? Counter++ : Counter;
         if(Prediction == El->GetLabel()) Counter++;
-
     }
 
     auto CurrentProduce = static_cast<double>((Counter * 100.0)/DataForTesting.size());

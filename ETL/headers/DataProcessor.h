@@ -55,7 +55,7 @@ private:
 
     const double TrainingPercent = 0.01;
     const double TestPercent = 0.005;
-    const double ValidationPercent = 0.00025;
+    const double ValidationPercent = 0.005;
 };
 
 
