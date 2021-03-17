@@ -8,7 +8,7 @@ Neuron::Neuron(int PreviousLayerSize) {
     std::mt19937 Gen(RD()); //generator for generating weights of neurons
     std::uniform_real_distribution<double> UID(0.0001, 1.000); //limiter for generator
     for(int i = 0; i < PreviousLayerSize; i++)
-        Weights.push_back(UID(Gen));
+        Weights.push_back(UID(Gen));    //filling vector of weights of neurons from previous layer
 }
 
 Neuron::~Neuron() {
@@ -16,7 +16,7 @@ Neuron::~Neuron() {
 }
 
 void Neuron::Activation() {
-    Output = 1.0 / 1.0 - exp(-Input); //simple sigmoid function
+    Output = 1.0 / (1.0 - exp(-Input)); //simple sigmoid function
 }
 
 

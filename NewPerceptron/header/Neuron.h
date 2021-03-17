@@ -15,7 +15,7 @@ public:
 
     void Activation();  //typical sigmoid
     void SetInput(double NewInput)                      {   Input = NewInput; }
-    void SetDouble(double NewDelta)                     {   Delta = NewDelta; }
+    void SetDelta(double NewDelta)                     {   Delta = NewDelta; }
     void SetWeights(std::vector<double> NewWeights)     {   Weights = NewWeights; }
     double GetOutput()                                  {   return Output; }
     double GetDelta()                                   {   return Delta; }

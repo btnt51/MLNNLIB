@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
 project(NewP)
-set(SOURCELIB source/Neuron.cpp source/Layers.cpp source/Web.cpp)
-set(HEADERLIB header/Neuron.h header/Layers.h header/Web.h)
+set(SOURCELIB source/Neuron.cpp source/Layer.cpp source/Web.cpp)
+set(HEADERLIB header/Neuron.h header/Layer.h header/Web.h)
 add_library(NewP ${HEADERLIB} ${SOURCELIB})

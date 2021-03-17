@@ -1,6 +1,7 @@
 #include <KNN/headers/KNN.h>
 #include <K-means/headers/Kmeans.h>
-#include "NN/headers/NeuralNetwork.h"
+#include <header/Web.h>
+//#include "NN/headers/NeuralNetwork.h"
 
 
 int main() {
@@ -81,8 +82,8 @@ int main() {
     km->InitClusters();
     km->Train();
     printf("Overall Performance: %.2f\n",km->TestProduce());*/
-    std::vector<int> HiddenLayer = {2, 4, 6, 8};
-    auto *Net = new NeuralNetwork(HiddenLayer,
+    //std::vector<int> HiddenLayer = {2, 4, 6, 8};
+    /*auto *Net = new NeuralNetwork(HiddenLayer,
                                   dataProcessor->GetDataForTraining().at(0)->GetNormalizedFeatureVector().size(),
                                            dataProcessor->GetCountsOfClasses(), 0.0000005);
     Net->SetDataForTraining(dataProcessor->GetDataForTraining());
@@ -93,7 +94,17 @@ int main() {
     //Net->Train(1000);
     Net->NewTypeOfTrain();
     std::cout << "Test Performance is " << Net->TestProduce() <<"\n";
-    std::cout << "Validation Produce is " << Net->ValidateProduce() << "\n";
+    std::cout << "Validation Produce is " << Net->ValidateProduce() << "\n";*/
+    std::vector<int> HiddenLayer = {10};
+    auto *web = new Web(HiddenLayer,0.55,
+                        dataProcessor->GetDataForTraining().at(0)->GetNormalizedFeatureVector().size(),
+                        dataProcessor->GetCountsOfClasses());
+    web->SetDataForValidation(dataProcessor->GetDataForValidation());
+    web->SetDataForTesting(dataProcessor->GetDataForTesting());
+    web->SetDataForTraining(dataProcessor->GetDataForTraining());
+    web->Train();
+    std::cout << "Test Performance is " << web->TestPerformance() <<"\n";
+    std::cout << "Validation Produce is " << web->ValidatePerformance() << "\n";
     return 0;
 }
 

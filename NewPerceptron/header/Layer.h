@@ -2,15 +2,15 @@
 // Created by 51btn on 12.03.2021.
 //
 
-#ifndef NEWP_LAYERS_H
-#define NEWP_LAYERS_H
+#ifndef NEWP_LAYER_H
+#define NEWP_LAYER_H
 
 #include "Neuron.h"
 
-class Layers {
+class Layer {
 public:
-    Layers(int,int);                        //needs size of previous layer and of current layer
-    ~Layers();
+    Layer(int, int);                        //needs size of previous layer and of current layer
+    ~Layer();
 
     int GetCurrentLayerSize()                   {   return CurrentLayerSize; }
     std::vector<Neuron *> GetNeurons()          {   return Neurons; }
@@ -21,4 +21,4 @@ private:
 };
 
 
-#endif //NEWP_LAYERS_H
+#endif //NEWP_LAYER_H
